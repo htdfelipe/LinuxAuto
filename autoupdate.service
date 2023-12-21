@@ -1,0 +1,9 @@
+[Unit]
+Description=Script de Atualização Automática
+
+[Service]
+Type=oneshot
+ExcStart=/opt/htepil/autoupdate.sh
+
+[Install]
+WantedBy=multi-user.target
