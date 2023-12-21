@@ -1,16 +1,24 @@
 #!/bin/bash
 
 # Configurações SFTP
-SFTP_SERVER="10.1.0.3"
-SFTP_USER="root"
-SFTP_PASSWORD="ABG#7102@"
-REMOTE_PATH="/srv/dev-disk-by-uuid-6f48e4e0-a07c-4495-8b6e-ea1f7e6323de/Usuarios/ArquivosTI/ProjetosFelipe/SistemaDeAtualizacao/autoupdate.sh"
-LOCAL_PATH="/opt/htepil/autoupdate.sh"  # Alterado o nome do arquivo local
+SFTP_SERVER="sv"
+SFTP_USER="user"
+SFTP_PASSWORD="pass"
+REMOTE_PATH="caminho/do/servidor/script.sh"
+LOCAL_PATH="caminho/da/maquina/aonde/estara/o/script.sh"  # Alterado o nome do arquivo local
+
+# Define o diretório de destino para o log
+log_dir="/opt/htepil/log"
 
 # Verifica se o comando 'expect' está instalado
 if ! command -v expect &> /dev/null; then
     sudo apt install expect -y
     exit 1
+fi
+
+# Cria o diretório de log se ele não existir
+if [ ! -d "$log_dir" ]; then
+    mkdir -p "$log_dir"
 fi
 
 # Função para baixar arquivo via SFTP
@@ -32,4 +40,4 @@ EOD
 
 # Chamando funções
 baixar_arquivo_sftp
-
+chmod +x * -R
